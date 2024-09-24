@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Title and Tags Generator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.5rem;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #444;
+    }
+
+    #title, #tags {
+      display: inline-block;
+      padding: 10px;
+      font-size: 1.1rem;
+      color: #555;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-top: 10px;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .generate-btn {
+      background-color: #28a745;
+      margin-top: 20px;
+    }
+
+    .generate-btn:hover {
+      background-color: #218838;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      #title, #tags {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Title and Tags</h1>
+
+  <div class="container">
+    <h3>Title:</h3>
+    <span id="title">Generating...</span>
+    <button onclick="copyToClipboard('title')">Copy Title</button>
+  </div>
+
+  <div class="container">
+    <h3>Tags:</h3>
+    <span id="tags">Generating...</span>
+    <button onclick="copyToClipboard('tags')">Copy Tags</button>
+  </div>
+
+  <button class="generate-btn" onclick="generateRandom()">Generate New</button>
+
+  <script>
+    const titles = [
+    "Trendy iPhone 16 Pro Max Case",
+    "Sleek iPhone 16 & Samsung S23 Ultra Covers",
+    "Customized iPhone 16 Pro & Samsung S24 Ultra Case",
+    "Stylish iPhone 16 & Samsung S24 Ultra Phone Cases",
+    "Personalized iPhone 16 Pro Max & Samsung S24 Ultra Case",
+    "Sleek iPhone 16 Pro & Samsung S24 Ultra Case",
+    "Customized iPhone 16 Pro Max Phone Cover",
+    "Trendy iPhone 16 & Samsung S23 Ultra Covers",
+    "Stylish iPhone 16 Pro & Samsung S23 Ultra Cases",
+    "Custom iPhone 16 Pro Max & Samsung S24 Ultra Case",
+    "Sleek iPhone 16 & Samsung S24 Ultra Phone Case",
+    "Personalized iPhone 16 Pro & Samsung S23 Ultra Case",
+    "Stylish iPhone 16 Pro Max & Samsung S23 Ultra Phone Covers",
+    "Custom iPhone 16 & Samsung S24 Ultra Case",
+    "Trendy iPhone 16 Pro Max & Samsung S24 Ultra Covers",
+    "Personalized iPhone 16 Pro & Samsung S24 Ultra Case",
+    "Sleek iPhone 16 & Samsung S24 Ultra Covers",
+    "Customized iPhone 16 Pro Max & Samsung S23 Ultra Case",
+    "Stylish iPhone 16 & Samsung S23 Ultra Cases",
+    "Sleek iPhone 16 Pro & Samsung S24 Ultra Case",
+    "Personalized iPhone 16 Pro Max & Samsung S23 Ultra Phone Cases",
+    "Custom iPhone 16 Pro & Samsung S24 Ultra Case",
+    "Stylish iPhone 16 & Samsung S23 Ultra Covers",
+    "Trendy iPhone 16 Pro Max & Samsung S24 Ultra Case",
+    "Customized iPhone 16 Pro & Samsung S24 Ultra Covers",
+    "Sleek iPhone 16 Pro Max & Samsung S23 Ultra Case",
+    "Personalized iPhone 16 Pro & Samsung S24 Ultra Phone Cases",
+    "Custom iPhone 16 Pro Max & Samsung S23 Ultra Phone Case",
+    "Stylish iPhone 16 Pro Max & Samsung S24 Ultra Case",
+    "Sleek iPhone 16 & Samsung S23 Ultra Phone Cover",
+    "Customized iPhone 16 Pro Max & Samsung S24 Ultra Cases",
+    "Personalized iPhone 16 Pro Max & Samsung S23 Ultra Covers",
+    "Trendy iPhone 16 Pro & Samsung S24 Ultra Phone Case",
+    "Sleek iPhone 16 Pro Max & Samsung S24 Ultra Phone Covers",
+    "Stylish iPhone 16 & Samsung S23 Ultra Phone Cases",
+    "Customized iPhone 16 Pro Max & Samsung S24 Ultra Case",
+    "Personalized iPhone 16 Pro & Samsung S23 Ultra Phone Cover",
+    "Sleek iPhone 16 Pro Max & Samsung S23 Ultra Covers",
+    "Custom iPhone 16 Pro Max & Samsung S24 Ultra Covers",
+    "Stylish iPhone 16 Pro & Samsung S23 Ultra Case",
+    "Customized iPhone 16 Pro Max & Samsung S24 Ultra Cover",
+    "Trendy iPhone 16 Pro & Samsung S23 Ultra Case",
+    "Sleek iPhone 16 & Samsung S24 Ultra Case",
+    "Stylish iPhone 16 Pro Max & Samsung S23 Ultra Case",
+    "Custom iPhone 16 Pro Max & Samsung S24 Ultra Phone Case",
+    "Personalized iPhone 16 & Samsung S23 Ultra Covers",
+    "Sleek iPhone 16 Pro & Samsung S24 Ultra Phone Case",
+    "Stylish iPhone 16 Pro Max & Samsung S24 Ultra Covers",
+    "Customized iPhone 16 Pro Max & Samsung S23 Ultra Phone Case",
+    "Sleek iPhone 16 & Samsung S23 Ultra Covers",
+    "Trendy iPhone 16 Pro Max & Samsung S24 Ultra Cases",
+    "Personalized iPhone 16 Pro Max & Samsung S23 Ultra Case",
+    "Stylish iPhone 16 Pro & Samsung S24 Ultra Case",
+    "Sleek iPhone 16 Pro Max & Samsung S23 Ultra Cover",
+    "Custom iPhone 16 & Samsung S24 Ultra Phone Case",
+    "Customized iPhone 16 Pro Max & Samsung S24 Ultra Phone Covers",
+    "Personalized iPhone 16 Pro & Samsung S23 Ultra Cases",
+    "Stylish iPhone 16 Pro Max & Samsung S23 Ultra Covers",
+    "Sleek iPhone 16 & Samsung S24 Ultra Phone Case",
+    "Trendy iPhone 16 Pro Max & Samsung S24 Ultra Covers",
+    "Customized iPhone 16 Pro Max & Samsung S23 Ultra Cases",
+    "Stylish iPhone 16 & Samsung S24 Ultra Case",
+    "Custom iPhone 16 Pro Max & Samsung S23 Ultra Phone Covers",
+    "Personalized iPhone 16 & Samsung S23 Ultra Phone Case",
+    "Sleek iPhone 16 Pro Max & Samsung S24 Ultra Phone Covers",
+    "Stylish iPhone 16 Pro & Samsung S23 Ultra Phone Cases",
+    "Customized iPhone 16 Pro Max & Samsung S24 Ultra Covers",
+    "Sleek iPhone 16 & Samsung S23 Ultra Phone Cases",
+    "Personalized iPhone 16 Pro Max & Samsung S23 Ultra Phone Cases",
+    "Trendy iPhone 16 Pro & Samsung S23 Ultra Phone Covers",
+    "Custom iPhone 16 Pro Max & Samsung S24 Ultra Phone Case",
+    "Sleek iPhone 16 & Samsung S23 Ultra Cases",
+    "Stylish iPhone 16 Pro Max & Samsung S23 Ultra Cases",
+    "Personalized iPhone 16 Pro & Samsung S24 Ultra Covers",
+    "Customized iPhone 16 Pro Max & Samsung S23 Ultra Case",
+    "Sleek iPhone 16 Pro Max & Samsung S23 Ultra Case",
+    "Stylish iPhone 16 Pro & Samsung S24 Ultra Cases",
+    "Customized iPhone 16 Pro Max & Samsung S23 Ultra Phone Covers",
+    "Trendy iPhone 16 Pro Max & Samsung S24 Ultra Phone Cases",
+    "Sleek iPhone 16 & Samsung S23 Ultra Covers",
+    "Personalized iPhone 16 Pro & Samsung S24 Ultra Phone Case",
+    "Stylish iPhone 16 Pro Max & Samsung S24 Ultra Phone Covers",
+    "Sleek iPhone 16 Pro Max & Samsung S23 Ultra Cases",
+    "Customized iPhone 16 Pro & Samsung S23 Ultra Case",
+    "Personalized iPhone 16 Pro Max & Samsung S23 Ultra Phone Cover",
+    "Stylish iPhone 16 Pro Max & Samsung S24 Ultra Phone Case",
+    "Custom iPhone 16 Pro & Samsung S23 Ultra Phone Covers",
+    "Trendy iPhone 16 Pro Max & Samsung S24 Ultra Phone Cases",
+    "Sleek iPhone 16 Pro & Samsung S23 Ultra Phone Covers",
+    "Stylish iPhone 16 Pro Max & Samsung S24 Ultra Cases",
+    "Customized iPhone 16 & Samsung S24 Ultra Phone Covers"
+];
+
+    const tags = [
+    "iPhone 16", "iPhone 16 Pro", "iPhone 16 Pro Max", "iPhone 16 case", "iPhone 16 cover", 
+    "iPhone 16 Pro case", "iPhone 16 Pro Max cover", "iPhone 16 Pro Max case", "custom iPhone 16 case", 
+    "trendy iPhone 16 case", "iPhone 16 phone case", "iPhone 16 clear case", "iPhone 16 silicone case", 
+    "iPhone 16 leather case", "personalized iPhone 16 case", "custom iPhone 16 Pro case", 
+    "iPhone 16 Pro phone case", "iPhone 16 Pro Max phone case", "iPhone 16 Pro clear case", 
+    "iPhone 16 Pro Max silicone case", "iPhone 16 Pro leather case", "iPhone 16 Pro Max leather case", 
+    "iPhone 16 Pro Max custom case", "iPhone 16 Pro Max trendy case", "Samsung S23", "Samsung S23 Ultra", 
+    "Samsung S23 case", "Samsung S23 Ultra case", "Samsung S23 cover", "Samsung S23 Ultra cover", 
+    "custom Samsung S23 case", "custom Samsung S23 Ultra case", "Samsung S23 trendy case", 
+    "Samsung S23 Ultra custom case", "Samsung S23 Ultra silicone case", "Samsung S23 phone case", 
+    "Samsung S23 Ultra leather case", "Samsung S23 Ultra clear case", "Samsung S23 Pro case", 
+    "Samsung S23 Ultra phone case", "Samsung S24", "Samsung S24 Ultra", "Samsung S24 case", 
+    "Samsung S24 Ultra case", "Samsung S24 cover", "Samsung S24 Ultra cover", "custom Samsung S24 case", 
+    "custom Samsung S24 Ultra case", "Samsung S24 trendy case", "Samsung S24 Ultra custom case", 
+    "Samsung S24 Ultra silicone case", "Samsung S24 phone case", "Samsung S24 Ultra leather case", 
+    "Samsung S24 Ultra clear case", "Samsung S24 Pro case", "Samsung S24 Ultra phone case", 
+    "iPhone 13", "iPhone 13 Pro", "iPhone 13 Pro Max", "iPhone 13 case", "iPhone 13 Pro case", 
+    "iPhone 13 Pro Max case", "custom iPhone 13 case", "iPhone 13 Pro cover", "iPhone 13 Pro Max cover", 
+    "iPhone 13 silicone case", "iPhone 13 leather case", "iPhone 13 trendy case", "iPhone 13 clear case", 
+    "iPhone 14", "iPhone 14 Pro", "iPhone 14 Pro Max", "iPhone 14 case", "iPhone 14 Pro case", 
+    "iPhone 14 Pro Max case", "custom iPhone 14 case", "iPhone 14 Pro cover", "iPhone 14 Pro Max cover", 
+    "iPhone 14 silicone case", "iPhone 14 leather case", "iPhone 14 trendy case", "iPhone 14 clear case", 
+    "iPhone 15", "iPhone 15 Pro", "iPhone 15 Pro Max", "iPhone 15 case", "iPhone 15 Pro case", 
+    "iPhone 15 Pro Max case", "custom iPhone 15 case", "iPhone 15 Pro cover", "iPhone 15 Pro Max cover", 
+    "iPhone 15 silicone case", "iPhone 15 leather case", "iPhone 15 trendy case", "iPhone 15 clear case", 
+    "custom phone case", "phone case", "trendy phone case", "clear phone case", "leather phone case", 
+    "silicone phone case", "personalized phone case", "custom iPhone case", "custom Samsung case", 
+    "luxury phone case", "customized phone case", "ultra Samsung phone case", "personalized iPhone case", 
+    "ultra Samsung S23 case", "ultra Samsung S24 case", "custom iPhone Pro case", "iPhone Pro Max case", 
+    "iPhone Pro case", "Samsung Ultra phone case", "trendy Samsung case", "customized iPhone case", 
+    "luxury iPhone case", "designer phone case", "premium phone case", "shockproof phone case", 
+    "anti-scratch phone case", "durable phone case", "rugged phone case", "slim phone case", 
+    "matte phone case", "customized Samsung case", "Samsung Galaxy case", "Samsung Galaxy S23 case", 
+    "Samsung Galaxy S24 case", "Samsung Galaxy Ultra case", "personalized Samsung case", "custom Samsung S24 Ultra case", 
+    "customized Samsung S23 case", "iPhone Max case", "customized iPhone 16 Pro Max case", 
+    "trendy iPhone 16 Pro Max case", "slim iPhone 16 case", "custom iPhone 16 Pro Max cover", 
+    "customized Samsung Galaxy S23 Ultra", "Samsung Ultra phone case", "clear Samsung Ultra case", 
+    "personalized Samsung S23 Ultra case", "customized iPhone 16 Pro case", "custom iPhone 16 case", 
+    "Samsung S24 Ultra trendy case", "Samsung S23 Ultra Pro case", "Samsung S24 Pro Max case", 
+    "iPhone Pro leather case", "iPhone Max clear case", "ultra Samsung case", "custom Samsung Ultra case", 
+    "trendy Samsung Galaxy case", "personalized phone cover", "luxury iPhone Pro Max case", 
+    "custom iPhone 13 Pro Max case", "custom iPhone 14 Pro Max case", "Samsung S23 Ultra premium case", 
+    "Samsung S24 Ultra durable case", "Samsung S24 Ultra shockproof case", "iPhone Pro Max rugged case", 
+    "iPhone Pro Max slim case", "Samsung Galaxy S23 premium case", "custom iPhone 16 leather case", 
+    "iPhone 16 rugged case", "Samsung S24 rugged case", "iPhone 16 Pro shockproof case", 
+    "Samsung S23 Ultra slim case", "Samsung S24 Ultra matte case"
+];
+
+    function getRandom(arr, n) {
+  let result = []; // Use 'let' for reassignable variables
+  let len = arr.length; // 'let' because we'll change the value later
+  let taken = new Array(len);
+  
+  if (n > len) n = len; // Ensure you don't try to take more elements than available
+  
+  while (n--) {
+    const x = Math.floor(Math.random() * len); // 'const' is fine here as it doesn’t need reassignment
+    result[n] = arr[x in taken ? taken[x] : x];
+    taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
+}
+
+
+    function generateRandom() {
+      const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+      const randomTags = getRandom(tags, 15).join(", ");
+
+      document.getElementById("title").innerText = randomTitle;
+      document.getElementById("tags").innerText = randomTags;
+    }
+
+    function copyToClipboard(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(id.charAt(0).toUpperCase() + id.slice(1) + " copied to clipboard!");
+      });
+    }
+
+    // Generate random title and tags on page load
+    window.onload = generateRandom;
+  </script>
+</body>
+</html>
