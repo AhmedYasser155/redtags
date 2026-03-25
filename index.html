@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Random Title and Tags Generator</title>
+
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f9;
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
       margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,107 +17,72 @@
       min-height: 100vh;
     }
 
-    h1 {
-      color: #333;
-      font-size: 2.5rem;
-    }
+    h1 { font-size: 2.5rem; }
 
     .container {
-      background-color: #fff;
-      border-radius: 8px;
+      background: #fff;
       padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
       width: 80%;
       max-width: 600px;
       text-align: center;
-    }
-
-    h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      color: #444;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     #title, #tags {
       display: inline-block;
       padding: 10px;
-      font-size: 1.1rem;
-      color: #555;
-      background-color: #f9f9f9;
+      margin-top: 10px;
+      background: #f9f9f9;
       border: 1px solid #ddd;
       border-radius: 4px;
-      margin-top: 10px;
-      max-width: 100%;
-      word-wrap: break-word;
     }
 
     button {
-      background-color: #007BFF;
-      color: white;
       padding: 10px 15px;
-      font-size: 1rem;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       margin-top: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #0056b3;
+      color: white;
+      background: #007BFF;
     }
 
     .generate-btn {
-      background-color: #28a745;
+      background: #28a745;
       margin-top: 20px;
-    }
-
-    .generate-btn:hover {
-      background-color: #218838;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      h3 {
-        font-size: 1rem;
-      }
-
-      #title, #tags {
-        font-size: 1rem;
-      }
     }
   </style>
 </head>
+
 <body>
-    <h1>REDBUBBLE</h1>
+<h1>REDBUBBLE</h1>
 
-  <div class="container">
-    <h3>Title:</h3>
-    <span id="title">Generating...</span>
-    <button onclick="copyToClipboard('title')">Copy Title</button>
-  </div>
+<div class="container">
+  <h3>Title:</h3>
+  <span id="title">Generating...</span><br>
+  <button onclick="copyToClipboard('title')">Copy Title</button>
+</div>
 
-  <div class="container">
-    <h3>Tags:</h3>
-    <span id="tags">Generating...</span>
-    <button onclick="copyToClipboard('tags')">Copy Tags</button>
-  </div>
+<div class="container">
+  <h3>Tags:</h3>
+  <span id="tags">Generating...</span><br>
+  <button onclick="copyToClipboard('tags')">Copy Tags</button>
+</div>
 
-  <button class="generate-btn" onclick="generateRandom()">Generate New</button>
+<button class="generate-btn" onclick="generateRandom()">Generate New</button>
 
-  <script>
+<script>
+/* ================= TITLES ================= */
 const titles = [
-    "Trendy iPhone 16 Pro Max Case",
-    "Trendy iPhone 16 Pro Max Case",
-    "Sleek iPhone 16 & Samsung S23 Ultra Covers",
-    "Sleek iPhone 16 & Samsung S23 Ultra Covers",
-    "Customized iPhone 16 Pro & Samsung S24 Ultra Case",
-    "Customized iPhone 16 Pro & Samsung S24 Ultra Case",
+  // iPhone 16 / Samsung S23-S24
+  "Trendy iPhone 16 Pro Max Case",
+  "Sleek iPhone 16 & Samsung S23 Ultra Covers",
+  "Customized iPhone 16 Pro & Samsung S24 Ultra Case",
+  "Stylish iPhone 16 & Samsung S24 Ultra Phone Cases",
+
+  // iPhone Air
   "iPhone Air Slim Clear Case – Lightweight Shockproof Cover",
   "iPhone Air Designer Wallet Case – Premium Leather Protection",
   "iPhone Air Custom Printed Case – Personalized Mobile Cover",
@@ -125,325 +90,129 @@ const titles = [
   "iPhone Air Rugged Hybrid Case – Tough Shockproof Mobile Cover",
   "iPhone Air Floral Case – Cute Stylish Phone Cover",
   "iPhone Air Magnetic Wallet Case – Functional Mobile Protection",
-  "iPhone Air Transparent Case – Sleek Minimalist Cell Phone Cover",
-  "iPhone Air Premium Leather Folio Case – Luxury Mobile Cover",
-  "iPhone Air Shockproof Bumper Case – Rugged Protective Cover",
-  "iPhone Air Cute Aesthetic Case – Slim Trendy Phone Cover",
-    "Stylish iPhone 16 & Samsung S24 Ultra Phone Cases",
-    "Stylish iPhone 16 & Samsung S24 Ultra Phone Cases",
-    "iPhone 17 Pro Max Customized Wallet Case – Stylish Protective Mobile Cover",
-    "iPhone 17 Pro Max Designer Printed Case – Personalized Mobile Cover",
-    "iPhone 17 Pro Max Rugged Hybrid Case – Tough Shockproof Mobile Cover",
-    "iPhone 17 Pro Max Premium Protective Wallet Case – Luxury Mobile Cover",
-    "iPhone 17 Pro Max Custom Printed Case – Personalized Artistic Phone Cover",
-    "iPhone 17 Pro Max Shockproof Bumper Case – Rugged Protective Cover",
-    "iPhone 17 Pro Max Floral Case – Cute Stylish Mobile Phone Cover",
-    "iPhone 17 Pro Max Modern Flip Cover – Premium Leather Design",
-    "iPhone 17 Pro Max Slim Fit Case – Sleek Minimalist Protection",
-    "iPhone 17 Pro Max Magnetic Wallet Case – Functional Mobile Protection",
-    "iPhone 17 Pro Max Luxury Leather Folio Case – Premium Mobile Cover",
-    "iPhone 17 Pro Max Water Resistant Case – Ultimate Protection",
-    "iPhone 17 Pro Max Card Holder Wallet Case – Multi-Functional Design",
-    "iPhone 17 Pro Max Cute Aesthetic Case – Trendy Phone Cover",
-    "iPhone 17 Pro Max Personalized Gift Case – Custom Text Mobile Cover",
-    "iPhone Air Slim Clear Case – Lightweight Shockproof Cover",
-    "iPhone Air Designer Wallet Case – Premium Leather Protection",
-    "iPhone Air Custom Printed Case – Personalized Mobile Cover",
-    "iPhone Air Silicone Protective Case – Sleek Minimalist Design",
-    "iPhone Air Rugged Hybrid Case – Tough Shockproof Mobile Cover",
-    "iPhone Air Floral Case – Cute Stylish Phone Cover",
-    "iPhone Air Magnetic Wallet Case – Functional Mobile Protection",
-    "iPhone Air Transparent Case – Sleek Minimalist Cell Phone Cover",
-    "iPhone Air Premium Leather Folio Case – Luxury Mobile Cover",
-    "iPhone Air Shockproof Bumper Case – Rugged Protective Cover",
-    "iPhone Air Cute Aesthetic Case – Slim Trendy Phone Cover",
-    "iPhone Air Personalized Gift Case – Custom Text Mobile Cover",
-    "Samsung S25 Ultra Customized Wallet Case – Premium Mobile Cover",
-    "Samsung S25 Ultra Designer Printed Case – Trendy Customized Phone Case",
-    "Samsung S25 Ultra Rugged Protective Case – Shock Resistant Hybrid Cover",
-    "Samsung S25 Ultra Slim Wallet Case – Stylish Mobile Protection",
-    "Samsung S25 Ultra Leather Wallet Case – Luxury Customized Phone Cover",
-    "Samsung S25 Ultra Clear Transparent Case – Sleek Slim Fit Phone Cover",
-    "Samsung S25 Ultra Shockproof Case – Protective Mobile Cover",
-    "Samsung S25 Ultra Custom Text Case – Personalized Clear Phone Cover",
-    "Samsung S25 Ultra Flip Leather Wallet Case – Premium Customized Cover",
-    "Samsung S25 Ultra Cute Aesthetic Case – Slim Trendy Phone Cover",
-    "Samsung S25 Ultra Personalized Gift Case – Custom Text Mobile Cover",
-    "Google Pixel 9 Pro Designer Case – Trendy Protective Mobile Cover",
-    "Google Pixel 9 Pro Slim Fit Case – Sleek Minimalist Protection",
-    "Google Pixel 9 Pro Custom Printed Case – Personalized Artistic Phone Cover",
-    "Google Pixel 9 Pro Rugged Hybrid Case – Tough Shockproof Mobile Cover",
-    "Google Pixel 9 Pro Magnetic Wallet Case – Functional Mobile Protection",
-    "Google Pixel 9 Pro Premium Leather Folio Case – Luxury Mobile Cover",
-    "Google Pixel 9 Pro Water Resistant Case – Ultimate Protection",
-    "Google Pixel 9 Pro Card Holder Wallet Case – Multi-Functional Design",
-    "Google Pixel 9 Pro Cute Aesthetic Case – Trendy Phone Cover",
-    "Google Pixel 9 Pro Personalized Gift Case – Custom Text Mobile Cover",
-    "Best Trending Phone Case 2025 – New Release Mobile Cover",
-    "Customizable Designer Phone Case – Unique Gift for Tech Lovers",
-    "Luxury Shockproof Phone Case – Premium Protection for New Phones",
-    "Minimalist Clear Phone Case – Sleek Modern Mobile Cover",
-    "Personalized Photo Phone Case – Custom Art Mobile Cover",
-    "Eco-Friendly Biodegradable Phone Case – Green Living Accessory",
-    "Inspirational Quote Phone Case – Motivational Mobile Cover",
-    "Cute Animal Print Phone Case – Stylish Wildlife Design",
-    "Fashionable Marble Pattern Phone Case – Elegant Sophisticated Look",
-    "Sports Team Phone Case – Fan Edition Mobile Cover",
-    "Holiday Themed Phone Case – Festive Seasonal Design",
-    "Retro Vintage Patterned Phone Case – Nostalgia Lovers Edition",
-    "Artistic Watercolor Phone Case – Creative Souls Collection",
-    "Travel-Inspired Map Phone Case – Adventure Seekers Edition",
-    "Custom Monogrammed Phone Case – Personalized Initials Gift",
-    "Gamer-Themed Phone Case – Esports Enthusiast Edition",
-    "Bold Psychedelic Colorful Phone Case – Artistic Statement",
-    "Classic Black and White Monochrome Phone Case – Timeless Design"]
-    
-    const tags = [
-    "boho",
-    "aesthetic",
-    "black",
-    "60s",
-    "70s",
-    "80s",
-    "90s",
-    "cool",
-    "trendy",
 
-  "aesthetic",
-    "vintage",
-    "retro",
-    "minimalist",
-    "nature",
-    "cute",
-    "funny",
-    "art",
-    "abstract",
-    "kawaii",
-    "dark",
-    "fantasy",
-    "pop culture",
-    "anime",
-    "psychedelic",
-    "surreal",
-    "geometric",
-    "boho",
-    "music",
-    "animals",
-    "travel",
-    "space",
-    // Trending and new phone models
-    "iPhone 17",
-    "iPhone 17 Pro",
-    "iPhone 17 Pro Max",
-  "iPhone Air",
-  "iPhone Air case",
-  "iPhone Air cover",
-  "iPhone Air accessories",
-  "iPhone Air wallet case",
-  "iPhone Air leather case",
-  "iPhone Air silicone case",
-  "iPhone Air clear case",
-  "iPhone Air trendy case",
-  "iPhone Air personalized case",
-  "iPhone Air custom case",
-    "iPhone Air",
-    "Samsung S25 Ultra",
-    "Samsung S25 Plus",
-    "Google Pixel 9",
-    "Google Pixel 9 Pro",
-    "latest phone",
-    "new release",
-    "trending phone",
-    "2025 phone",
-    "hot phone",
-    "must-have phone",
-    // Case types and features
-    "phone case",
-    "phone cover",
-    "mobile accessories",
-    "tech gift",
-    "designer case",
-    "customizable case",
-    "personalized case",
-    "shockproof",
-    "slim case",
-    "wallet case",
-    "clear case",
-    "leather case",
-    "printed case",
-    "protective case",
-    "minimalist case",
-    "cute case",
-    "aesthetic case",
-    "luxury case",
-    "artistic case",
-    "premium case",
-    "unique case",
-    "modern case",
-    "fashion case",
-    "gift for phone lovers",
-    "Redbubble trending",
-    "Redbubble phone case",
-    "Redbubble gift",
-    "art",
-    "abstract",
-    "kawaii",
-    "dark",
-    "fantasy",
-    "pop culture",
-    "anime",
-    "psychedelic",
-    "surreal",
-    "geometric",
-    "boho",
-    "music",
-    "animals",
-    "travel",
-    "space",
-    "coffee",
-    "streetwear",
-    "positive vibes",
-    "self-care",
-    "mental health",
-    "eco-friendly",
-    "motivation",
-    "gamer",
-    "seasonal",
-    "holiday",
-    "meme",
-    "collage",
-    "skate",
-    "foodie",
-    "sports",
-    "illustration",
-    "pattern",
-    "inspirational",
-    "personalized",
-    "customizable",
-    "modern",
-    "colorful",
-    "explore",
-    "iPhone 16", "iPhone 16", "iPhone 16",
-    "iPhone 16 Pro", "iPhone 16 Pro", "iPhone 16 Pro",
-    "iPhone 16 Pro Max", "iPhone 16 Pro Max", "iPhone 16 Pro Max",
-    "iPhone 16 case", "iPhone 16 cover", "iPhone 16 case",
-    "iPhone 16 Pro case", "iPhone 16 Pro Max cover", "iPhone 16 Pro case",
-    "iPhone 16 Pro Max case", "custom iPhone 16 case", "custom iPhone 16 Pro case",
-    "trendy iPhone 16 case", "iPhone 16 phone case", "iPhone 16 clear case",
-    "iPhone 16 silicone case", "iPhone 16 leather case", "personalized iPhone 16 case",
-    "custom iPhone 16 Pro case", "iPhone 16 Pro phone case", "iPhone 16 Pro Max phone case",
-    "iPhone 16 Pro clear case", "iPhone 16 Pro Max silicone case", "iPhone 16 Pro Max leather case",
-    "iPhone 16 Pro Max custom case", "iPhone 16 Pro Max trendy case", "Samsung S23", "Samsung S23 Ultra",
-    "Samsung S23 case", "Samsung S23 Ultra case", "Samsung S23 cover", "Samsung S23 Ultra cover",
-    "custom Samsung S23 case", "custom Samsung S23 Ultra case", "Samsung S23 trendy case",
-    "Samsung S23 Ultra custom case", "Samsung S23 Ultra silicone case", "Samsung S23 phone case",
-    "Samsung S23 Ultra leather case", "Samsung S23 Ultra clear case", "Samsung S23 Pro case",
-    "Samsung S23 Ultra phone case", "Samsung S24", "Samsung S24 Ultra", "Samsung S24 case",
-    "Samsung S24 Ultra case", "Samsung S24 cover", "Samsung S24 Ultra cover", "custom Samsung S24 case",
-    "custom Samsung S24 Ultra case", "Samsung S24 trendy case", "Samsung S24 Ultra custom case",
-    "Samsung S24 Ultra silicone case", "Samsung S24 phone case", "Samsung S24 Ultra leather case",
-    "Samsung S24 Ultra clear case", "Samsung S24 Pro case", "Samsung S24 Ultra phone case",
-    "iPhone 13", "iPhone 13 Pro", "iPhone 13 Pro Max", "iPhone 13 case", "iPhone 13 Pro case",
-    "iPhone 13 Pro Max case", "custom iPhone 13 case", "iPhone 13 Pro cover", "iPhone 13 Pro Max cover",
-    "iPhone 13 silicone case", "iPhone 13 leather case", "iPhone 13 trendy case", "iPhone 13 clear case",
-    "iPhone 14", "iPhone 14 Pro", "iPhone 14 Pro Max", "iPhone 14 case", "iPhone 14 Pro case",
-    "iPhone 14 Pro Max case", "custom iPhone 14 case", "iPhone 14 Pro cover", "iPhone 14 Pro Max cover",
-    "iPhone 14 silicone case", "iPhone 14 leather case", "iPhone 14 trendy case", "iPhone 14 clear case",
-    "iPhone 15", "iPhone 15 Pro", "iPhone 15 Pro Max", "iPhone 15 case", "iPhone 15 Pro case",
-    "iPhone 15 Pro Max case", "custom iPhone 15 case", "iPhone 15 Pro cover", "iPhone 15 Pro Max cover",
-    "iPhone 15 silicone case", "iPhone 15 leather case", "iPhone 15 trendy case", "iPhone 15 clear case",
-    "custom phone case", "phone case", "trendy phone case", "clear phone case", "leather phone case",
-    "silicone phone case", "personalized phone case", "custom iPhone case", "custom Samsung case",
-    "luxury phone case", "customized phone case", "ultra Samsung phone case", "personalized iPhone case",
-    "ultra Samsung S23 case", "ultra Samsung S24 case", "custom iPhone Pro case", "iPhone Pro Max case",
-    "iPhone Pro case", "Samsung Ultra phone case", "trendy Samsung case", "customized iPhone case",
-    "luxury iPhone case", "designer phone case", "premium phone case", "shockproof phone case",
-    "anti-scratch phone case", "durable phone case", "rugged phone case", "slim phone case",
-    "matte phone case", "customized Samsung case", "Samsung Galaxy case", "Samsung Galaxy S23 case",
-    "Samsung Galaxy S24 case", "Samsung Galaxy Ultra case", "personalized Samsung case", "custom Samsung S24 Ultra case",
-    "customized Samsung S23 case", "iPhone Max case", "customized iPhone 16 Pro Max case",
-  "iphone 17", "iphone 17 case", "iphone 17 pro", "iphone 17 pro case", "iphone 17 pro max",
-  "iphone 17 pro max case", "iphone 17 accessories", "iphone 17 cover", "iphone 17 protective case",
-  "iphone 17 pro cover", "iphone 17 pro max cover", "iphone 17 wallet case", "iphone 17 flip case",
-  "iphone 17 leather case", "iphone 17 silicone case", "iphone 17 clear case",
-  "iphone 17 transparent cover", "iphone 17 shockproof case", "iphone 17 slim case",
-  "iphone 17 customized case", "iphone 17 personalized cover", "iphone 17 cute case",
-  "iphone 17 floral case", "iphone 17 trendy case", "iphone 17 design case",
-  "iphone 17 printed case", "iphone 17 pro wallet case", "iphone 17 pro leather case",
-  "iphone 17 pro max leather wallet", "iphone 17 pro max flip cover",
-  "iphone 17 pro customized phone case", "iphone 17 pro max personalized case",
-  "iphone 17 mobile accessories", "iphone 17 mobile case", "iphone 17 stylish cover",
-  "iphone 17 fashion case", "iphone 17 modern phone case", "iphone 17 designer case",
-  "iphone 17 gift idea", "iphone 17 pro cool case", "iphone 17 pro max artistic cover",
-  "iphone 17 unique phone case", "iphone 17 best protection case", "iphone 17 scratch resistant case",
-  "iphone 17 heavy duty case", "iphone 17 rugged case", "iphone 17 slim fit cover",
-  "iphone 17 pocket wallet case", "iphone 17 card holder case", "iphone 17 folio wallet cover",
-  "iphone 17 pro max hybrid case", "iphone 17 pro stand case", "iphone 17 pro max shock resistant case",
-  "iphone 17 pro creative design case", "iphone 17 pro max minimalist cover",
-  "iphone 17 cute floral phone case", "iphone 17 custom printed case", "iphone 17 custom art case",
-  "iphone 17 pro gamer case", "iphone 17 pro max cool mobile cover", "iphone 17 trending accessories",
-  "iphone 17 pro fashion cover", "iphone 17 pro max unique wallet case",
-  "iphone 17 pastel aesthetic case", "iphone 17 graphic design cover", "iphone 17 custom text case",
-  "iphone 17 personalized gift cover", "iphone 17 pro stylish wallet case",
-  "iphone 17 pro max modern flip cover", "iphone 17 pro max custom mobile wallet",
-  "iphone 17 mobile wallet case", "iphone 17 luxury case", "iphone 17 premium cover",
-  "iphone 17 pro max premium wallet", "iphone 17 cute phone cover", "iphone 17 simple aesthetic case",
-  "iphone 17 pro clear transparent case", "iphone 17 pro max matte finish case",
-  "iphone 17 glossy design cover", "iphone 17 pro waterproof case",
-  "iphone 17 pro max water resistant cover", "iphone 17 wallet phone case with card slot",
-  "iphone 17 magnetic wallet cover", "iphone 17 detachable wallet case",
-  "iphone 17 flip wallet leather case", "samsung s25", "samsung s25 case", "samsung s25 ultra",
-  "samsung s25 ultra case", "samsung s25 plus", "samsung s25 plus case", "samsung s25 cover",
-  "samsung s25 ultra cover", "samsung s25 plus cover", "samsung s25 customized case",
-  "samsung s25 wallet case", "samsung s25 ultra leather wallet", "samsung s25 plus flip case",
-  "samsung s25 mobile accessories", "samsung s25 all versions case",
-    "trendy iPhone 16 Pro Max case", "slim iPhone 16 case", "custom iPhone 16 Pro Max cover",
-    "customized Samsung Galaxy S23 Ultra", "Samsung Ultra phone case", "clear Samsung Ultra case",
-    "personalized Samsung S23 Ultra case", "customized iPhone 16 Pro case", "custom iPhone 16 case",
-    "Samsung S24 Ultra trendy case", "Samsung S23 Ultra Pro case", "Samsung S24 Pro Max case",
-    "iPhone Pro leather case", "iPhone Max clear case", "ultra Samsung case", "custom Samsung Ultra case",
-    "trendy Samsung Galaxy case", "personalized phone cover", "luxury iPhone Pro Max case",
-    "custom iPhone 13 Pro Max case", "custom iPhone 14 Pro Max case", "Samsung S23 Ultra premium case",
-    "Samsung S24 Ultra durable case", "Samsung S24 Ultra shockproof case", "iPhone Pro Max rugged case",
-    "iPhone Pro Max slim case", "Samsung Galaxy S23 premium case", "custom iPhone 16 leather case",
-    "iPhone 16 rugged case", "Samsung S24 rugged case", "iPhone 16 Pro shockproof case",
-    "Samsung S23 Ultra slim case", "Samsung S24 Ultra matte case", "Samsung S25", "Samsung S25 Ultra",
-    "Samsung S25 case", "Samsung S25 cover", "custom Samsung S25 case", "custom Samsung S25 Ultra case"
+  // iPhone 17
+  "iPhone 17 Pro Max Customized Wallet Case – Stylish Protective Mobile Cover",
+  "iPhone 17 Pro Max Designer Printed Case – Personalized Mobile Cover",
+  "iPhone 17 Pro Max Rugged Hybrid Case – Tough Shockproof Mobile Cover",
+  "iPhone 17 Pro Max Slim Fit Case – Sleek Minimalist Protection",
+  "iPhone 17 Pro Max Magnetic Wallet Case – Functional Mobile Protection",
+
+  // Samsung S25
+  "Samsung S25 Ultra Customized Wallet Case – Premium Mobile Cover",
+  "Samsung S25 Ultra Rugged Protective Case – Shock Resistant Hybrid Cover",
+  "Samsung S25 Ultra Clear Transparent Case – Sleek Slim Fit Phone Cover",
+
+  // Pixel
+  "Google Pixel 9 Pro Designer Case – Trendy Protective Mobile Cover",
+  "Google Pixel 9 Pro Slim Fit Case – Sleek Minimalist Protection",
+
+  // Generic
+  "Best Trending Phone Case 2025 – New Release Mobile Cover",
+  "Customizable Designer Phone Case – Unique Gift for Tech Lovers",
+  "Minimalist Clear Phone Case – Sleek Modern Mobile Cover",
+  "Personalized Photo Phone Case – Custom Art Mobile Cover",
+  "Eco-Friendly Biodegradable Phone Case – Green Living Accessory",
+  "Retro Vintage Patterned Phone Case – Nostalgia Lovers Edition",
+  "Artistic Watercolor Phone Case – Creative Souls Collection",
+
+  // iPhone 18
+"iPhone 18 Slim Clear Case – Lightweight Shockproof Cover",
+"iPhone 18 Pro Designer Case – Premium Stylish Protection",
+"iPhone 18 Pro Max Rugged Case – Heavy Duty Shockproof Cover",
+"iPhone 18 Pro Max Magnetic Wallet Case – Functional Premium Design",
+"iPhone 18 Custom Printed Case – Personalized Artistic Cover",
+"iPhone 18 Pro Max Leather Wallet Case – Luxury Mobile Protection",
+
+// Samsung S26
+"Samsung S26 Ultra Customized Wallet Case – Premium Mobile Cover",
+"Samsung S26 Ultra Rugged Protective Case – Shock Resistant Hybrid Cover",
+"Samsung S26 Ultra Clear Transparent Case – Sleek Slim Fit Phone Cover",
+"Samsung S26 Ultra Magnetic Wallet Case – Functional Mobile Protection",
+"Samsung S26 Slim Fit Case – Minimalist Protective Design",
+"Samsung S26 Ultra Leather Wallet Case – Luxury Premium Cover"
 ];
-    function getRandom(arr, n) {
-  let result = []; // Use 'let' for reassignable variables
-  let len = arr.length; // 'let' because we'll change the value later
-  let taken = new Array(len);
+
+/* ================= TAGS ================= */
+const tags = [
+  // Style
+  "aesthetic","vintage","retro","minimalist","cute","dark","abstract",
+  "kawaii","anime","psychedelic","geometric","boho","colorful",
+
+  // Themes
+  "nature","animals","travel","space","music","fantasy","sports","foodie",
+
+  // Phone Models
+  "iPhone 17","iPhone 17 Pro Max","iPhone Air",
+  "Samsung S25 Ultra","Samsung S24 Ultra","Samsung S23 Ultra",
+  "Google Pixel 9 Pro",
   
-  if (n > len) n = len; // Ensure you don't try to take more elements than available
-  
-  while (n--) {
-    const x = Math.floor(Math.random() * len); // 'const' is fine here as it doesn’t need reassignment
-    result[n] = arr[x in taken ? taken[x] : x];
-    taken[x] = --len in taken ? taken[len] : len;
-  }
-  return result;
+  // iPhone 18
+"iPhone 18",
+"iPhone 18 Pro",
+"iPhone 18 Pro Max",
+"iPhone 18 case",
+"iPhone 18 Pro case",
+"iPhone 18 Pro Max case",
+"iPhone 18 cover",
+"iPhone 18 accessories",
+"iPhone 18 wallet case",
+"iPhone 18 leather case",
+"iPhone 18 clear case",
+"iPhone 18 silicone case",
+"iPhone 18 personalized case",
+"iPhone 18 custom case",
+"iPhone 18 trendy case",
+
+// Samsung S26
+"Samsung S26",
+"Samsung S26 Plus",
+"Samsung S26 Ultra",
+"Samsung S26 case",
+"Samsung S26 Ultra case",
+"Samsung S26 cover",
+"Samsung S26 Ultra cover",
+"Samsung S26 wallet case",
+"Samsung S26 leather case",
+"Samsung S26 clear case",
+"Samsung S26 silicone case",
+"Samsung S26 personalized case",
+"Samsung S26 custom case",
+"Samsung S26 trendy case",
+
+  // Product Keywords
+  "phone case","phone cover","custom phone case","personalized case",
+  "shockproof","slim case","wallet case","clear case","leather case",
+  "premium case","luxury case","designer case","trendy phone case",
+
+  // Marketing
+  "gift idea","tech gift","new release","trending","2025",
+  "Redbubble","Redbubble trending"
+];
+
+/* ================= FUNCTIONS ================= */
+function getRandom(arr, n) {
+  return [...new Set(arr)]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, n);
 }
 
+function generateRandom() {
+  const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+  const randomTags = getRandom(tags, 15).join(", ");
 
-    function generateRandom() {
-      const randomTitle = titles[Math.floor(Math.random() * titles.length)];
-      const randomTags = getRandom(tags, 15).join(", ");
+  document.getElementById("title").innerText = randomTitle;
+  document.getElementById("tags").innerText = randomTags;
+}
 
-      document.getElementById("title").innerText = randomTitle;
-      document.getElementById("tags").innerText = randomTags;
-    }
+function copyToClipboard(id) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert(id + " copied!");
+  });
+}
 
-    function copyToClipboard(id) {
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert(id.charAt(0).toUpperCase() + id.slice(1) + " copied to clipboard!");
-      });
-    }
-
-    // Generate random title and tags on page load
-    window.onload = generateRandom;
-  </script>
+window.onload = generateRandom;
+</script>
 </body>
 </html>
-
