@@ -66,6 +66,12 @@
 </div>
 
 <div class="container">
+  <h3>Main Tag:</h3>
+  <span id="mainTag">Generating...</span><br>
+  <button onclick="copyToClipboard('mainTag')">Copy Main Tag</button>
+</div>
+
+<div class="container">
   <h3>Tags:</h3>
   <span id="tags">Generating...</span><br>
   <button onclick="copyToClipboard('tags')">Copy Tags</button>
@@ -117,20 +123,20 @@ const titles = [
   "Artistic Watercolor Phone Case – Creative Souls Collection",
 
   // iPhone 18
-"iPhone 18 Slim Clear Case – Lightweight Shockproof Cover",
-"iPhone 18 Pro Designer Case – Premium Stylish Protection",
-"iPhone 18 Pro Max Rugged Case – Heavy Duty Shockproof Cover",
-"iPhone 18 Pro Max Magnetic Wallet Case – Functional Premium Design",
-"iPhone 18 Custom Printed Case – Personalized Artistic Cover",
-"iPhone 18 Pro Max Leather Wallet Case – Luxury Mobile Protection",
+  "iPhone 18 Slim Clear Case – Lightweight Shockproof Cover",
+  "iPhone 18 Pro Designer Case – Premium Stylish Protection",
+  "iPhone 18 Pro Max Rugged Case – Heavy Duty Shockproof Cover",
+  "iPhone 18 Pro Max Magnetic Wallet Case – Functional Premium Design",
+  "iPhone 18 Custom Printed Case – Personalized Artistic Cover",
+  "iPhone 18 Pro Max Leather Wallet Case – Luxury Mobile Protection",
 
-// Samsung S26
-"Samsung S26 Ultra Customized Wallet Case – Premium Mobile Cover",
-"Samsung S26 Ultra Rugged Protective Case – Shock Resistant Hybrid Cover",
-"Samsung S26 Ultra Clear Transparent Case – Sleek Slim Fit Phone Cover",
-"Samsung S26 Ultra Magnetic Wallet Case – Functional Mobile Protection",
-"Samsung S26 Slim Fit Case – Minimalist Protective Design",
-"Samsung S26 Ultra Leather Wallet Case – Luxury Premium Cover"
+  // Samsung S26
+  "Samsung S26 Ultra Customized Wallet Case – Premium Mobile Cover",
+  "Samsung S26 Ultra Rugged Protective Case – Shock Resistant Hybrid Cover",
+  "Samsung S26 Ultra Clear Transparent Case – Sleek Slim Fit Phone Cover",
+  "Samsung S26 Ultra Magnetic Wallet Case – Functional Mobile Protection",
+  "Samsung S26 Slim Fit Case – Minimalist Protective Design",
+  "Samsung S26 Ultra Leather Wallet Case – Luxury Premium Cover"
 ];
 
 /* ================= TAGS ================= */
@@ -192,16 +198,21 @@ const tags = [
 
 /* ================= FUNCTIONS ================= */
 function getRandom(arr, n) {
-  return [...new Set(arr)]
-    .sort(() => 0.5 - Math.random())
-    .slice(0, n);
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, n);
 }
 
 function generateRandom() {
   const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+  const randomMainTag = tags[Math.floor(Math.random() * tags.length)];
   const randomTags = getRandom(tags, 15).join(", ");
 
   document.getElementById("title").innerText = randomTitle;
+  document.getElementById("mainTag").innerText = randomMainTag;
   document.getElementById("tags").innerText = randomTags;
 }
 
